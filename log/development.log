@@ -1,0 +1,17 @@
+  [1m[35m (125.8ms)[0m  [1m[35mCREATE DATABASE "kimochi_letter_development" ENCODING = 'unicode'[0m
+  [1m[35m (105.5ms)[0m  [1m[35mCREATE DATABASE "kimochi_letter_test" ENCODING = 'unicode'[0m
+Started GET "/" for 127.0.0.1 at 2026-01-31 07:26:31 +0000
+Processing by Rails::WelcomeController#index as */*
+  Rendering /usr/local/bundle/gems/railties-7.0.10/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /usr/local/bundle/gems/railties-7.0.10/lib/rails/templates/rails/welcome/index.html.erb (Duration: 2.4ms | Allocations: 634)
+Completed 200 OK in 36ms (Views: 8.0ms | ActiveRecord: 0.0ms | Allocations: 7424)
+
+
+Started GET "/" for 172.30.0.1 at 2026-01-31 07:34:00 +0000
+Cannot render console from 172.30.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /usr/local/bundle/gems/railties-7.0.10/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /usr/local/bundle/gems/railties-7.0.10/lib/rails/templates/rails/welcome/index.html.erb (Duration: 6.4ms | Allocations: 272)
+Completed 200 OK in 21ms (Views: 12.6ms | ActiveRecord: 0.0ms | Allocations: 914)
+
+
