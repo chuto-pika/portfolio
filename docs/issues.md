@@ -1,4 +1,4 @@
-# KIMOCHI LETTER MVP - GitHub Issues
+# Epistory MVP - GitHub Issues
 
 ## Issue一覧（依存順）
 
