@@ -34,6 +34,19 @@ Metrics/BlockLength:
     - 'test/**/*'
     - 'db/migrate/*'
 
+Metrics/ClassLength:
+  Exclude:
+    - 'test/**/*'
+    - 'spec/**/*'
+
+Metrics/ParameterLists:
+  Exclude:
+    - 'test/**/*'
+    - 'spec/**/*'
+
+Minitest/MultipleAssertions:
+  Max: 10
+
 Metrics/MethodLength:
   Max: 15
 
