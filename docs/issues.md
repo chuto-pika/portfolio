@@ -192,15 +192,15 @@ Tailwind CSSとHotwire（Turbo/Stimulus）を導入し、アプリケーショ�
 ユーザーの回答に基づいてメッセージを生成するサービスクラスを実装する。条件分岐によるテンプレートベースの文章生成ロジック。
 
 ### やること
-- [ ] `app/services/message_generator.rb` の作成
-- [ ] recipient（相手）に応じた呼称・敬称の分岐ロジック
-- [ ] occasion（きっかけ）に応じた導入文のテンプレート
-- [ ] impressions（印象・複数）を文章に組み込むロジック
-- [ ] episode（エピソード）を自然に挿入するロジック
-- [ ] feeling（気持ち）に応じた締めくくり文のテンプレート
-- [ ] additional_message（追加メッセージ）がある場合の挿入ロジック
-- [ ] 各条件分岐の組み合わせテスト
-- [ ] サービスクラスのユニットテスト作成（主要パターンを網羅）
+- [x] `app/services/message_generator.rb` の作成
+- [x] recipient（相手）に応じた呼称・敬称の分岐ロジック
+- [x] occasion（きっかけ）に応じた導入文のテンプレート
+- [x] impressions（印象・複数）を文章に組み込むロジック
+- [x] episode（エピソード）を自然に挿入するロジック
+- [x] feeling（気持ち）に応じた締めくくり文のテンプレート
+- [x] additional_message（追加メッセージ）がある場合の挿入ロジック
+- [x] 各条件分岐の組み合わせテスト
+- [x] サービスクラスのユニットテスト作成（主要パターンを網羅）
 
 ### 完了条件
 - `MessageGenerator.new(message).generate` で文章が生成される
