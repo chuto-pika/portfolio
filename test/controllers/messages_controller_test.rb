@@ -118,7 +118,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "step4 displays episode form when steps 1-3 completed" do
-    complete_steps_1_to_3
+    complete_steps_one_to_three
     get step4_message_path
 
     assert_response :success
@@ -126,14 +126,14 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "save_step4 saves episode and redirects to step5" do
-    complete_steps_1_to_3
+    complete_steps_one_to_three
     post step4_message_path, params: { episode: "先月助けてもらった" }
 
     assert_redirected_to step5_message_path
   end
 
   test "save_step4 allows empty episode" do
-    complete_steps_1_to_3
+    complete_steps_one_to_three
     post step4_message_path, params: { episode: "" }
 
     assert_redirected_to step5_message_path
@@ -147,7 +147,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "step5 displays feelings when steps 1-3 completed" do
-    complete_steps_1_to_3
+    complete_steps_one_to_three
     get step5_message_path
 
     assert_response :success
@@ -155,14 +155,14 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "save_step5 saves feeling_id and redirects to step6" do
-    complete_steps_1_to_3
+    complete_steps_one_to_three
     post step5_message_path, params: { feeling_id: feelings(:thanks).id }
 
     assert_redirected_to step6_message_path
   end
 
   test "save_step5 redirects back when no feeling selected" do
-    complete_steps_1_to_3
+    complete_steps_one_to_three
     post step5_message_path, params: { feeling_id: "" }
 
     assert_redirected_to step5_message_path
@@ -176,7 +176,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "step6 displays additional message form when steps 1-5 completed" do
-    complete_steps_1_to_5
+    complete_steps_one_to_five
     get step6_message_path
 
     assert_response :success
@@ -184,31 +184,33 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "save_step6 creates message and redirects to show" do
-    complete_steps_1_to_5
+    complete_steps_one_to_five
 
     assert_difference "Message.count", 1 do
       post step6_message_path, params: { additional_message: "また会おうね" }
     end
 
     message = Message.last
+
     assert_redirected_to message_path(message)
-    assert message.generated_content.present?
+    assert_predicate message.generated_content, :present?
   end
 
   test "save_step6 allows empty additional message" do
-    complete_steps_1_to_5
+    complete_steps_one_to_five
 
     assert_difference "Message.count", 1 do
       post step6_message_path, params: { additional_message: "" }
     end
 
     message = Message.last
+
     assert_redirected_to message_path(message)
   end
 
   # === show ===
   test "show displays the generated message" do
-    complete_steps_1_to_5
+    complete_steps_one_to_five
     post step6_message_path, params: { additional_message: "" }
     message = Message.last
 
@@ -219,14 +221,14 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
 
   private
 
-  def complete_steps_1_to_3
+  def complete_steps_one_to_three
     post step1_message_path, params: { recipient_id: recipients(:parent).id }
     post step2_message_path, params: { occasion_id: occasions(:birthday).id }
     post step3_message_path, params: { impression_ids: [impressions(:supportive).id] }
   end
 
-  def complete_steps_1_to_5
-    complete_steps_1_to_3
+  def complete_steps_one_to_five
+    complete_steps_one_to_three
     post step4_message_path, params: { episode: "テストエピソード" }
     post step5_message_path, params: { feeling_id: feelings(:thanks).id }
   end
