@@ -219,6 +219,37 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  # === edit ===
+  test "edit displays edit form" do
+    message = create_message_via_steps
+
+    get edit_message_path(message)
+
+    assert_response :success
+    assert_select "textarea"
+  end
+
+  # === update ===
+  test "update saves edited_content and redirects to show" do
+    message = create_message_via_steps
+
+    patch message_path(message), params: { message: { edited_content: "編集済みメッセージ" } }
+
+    assert_redirected_to message_path(message)
+    assert_equal "編集済みメッセージ", message.reload.edited_content
+  end
+
+  # === restore ===
+  test "restore clears edited_content and redirects to edit" do
+    message = create_message_via_steps
+    message.update(edited_content: "編集済み")
+
+    patch restore_message_path(message)
+
+    assert_redirected_to edit_message_path(message)
+    assert_nil message.reload.edited_content
+  end
+
   private
 
   def complete_steps_one_to_three
@@ -231,5 +262,11 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     complete_steps_one_to_three
     post step4_message_path, params: { episode: "テストエピソード" }
     post step5_message_path, params: { feeling_id: feelings(:thanks).id }
+  end
+
+  def create_message_via_steps
+    complete_steps_one_to_five
+    post step6_message_path, params: { additional_message: "" }
+    Message.last
   end
 end

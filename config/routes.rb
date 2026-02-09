@@ -18,5 +18,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :messages, only: [:show]
+  resources :messages, only: %i[show edit update] do
+    member do
+      patch :restore
+    end
+  end
 end

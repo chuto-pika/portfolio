@@ -1,1 +1,1 @@
-# empty - no message fixtures needed for step form tests
+# empty - messages are created via step form flow in integration tests

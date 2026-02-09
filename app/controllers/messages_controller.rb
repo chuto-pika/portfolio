@@ -10,6 +10,22 @@ class MessagesController < ApplicationController
     redirect_to step1_message_path
   end
 
+  def edit
+    @message = Message.find(params[:id])
+  end
+
+  def update
+    @message = Message.find(params[:id])
+    @message.update(edited_content: params[:message][:edited_content])
+    redirect_to message_path(@message)
+  end
+
+  def restore
+    @message = Message.find(params[:id])
+    @message.update(edited_content: nil)
+    redirect_to edit_message_path(@message)
+  end
+
   def step1
     @recipients = Recipient.all
     @selected_id = session.dig(:message_draft, "recipient_id")
