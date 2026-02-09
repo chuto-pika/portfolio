@@ -13,7 +13,7 @@
 
     <%# アクションボタン %>
     <div class="flex gap-4 mb-4">
-      <%= link_to message_path(@message), class: "flex-1 h-14 bg-primary text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:shadow-[0_4px_20px_rgba(192,108,94,0.3)] transition-all" do %>
+      <%= link_to edit_message_path(@message), class: "flex-1 h-14 bg-primary text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:shadow-[0_4px_20px_rgba(192,108,94,0.3)] transition-all" do %>
         <span class="material-symbols-outlined text-xl">edit</span>
         編集する
       <% end %>
