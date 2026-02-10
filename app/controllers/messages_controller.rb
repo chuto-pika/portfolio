@@ -88,7 +88,15 @@ class MessagesController < ApplicationController
   end
 
   def save_step4
-    save_draft("episode", params[:episode].to_s.strip)
+    episode = params[:episode].to_s.strip
+    if episode.length > Message::EPISODE_MAX_LENGTH
+      @episode = episode
+      @error_message = "エピソードは#{Message::EPISODE_MAX_LENGTH}文字以内で入力してください"
+      render :step4
+      return
+    end
+
+    save_draft("episode", episode)
     redirect_to step5_message_path
   end
 
@@ -116,7 +124,15 @@ class MessagesController < ApplicationController
   end
 
   def save_step6
-    save_draft("additional_message", params[:additional_message].to_s.strip)
+    additional_message = params[:additional_message].to_s.strip
+    if additional_message.length > Message::ADDITIONAL_MESSAGE_MAX_LENGTH
+      @additional_message = additional_message
+      @error_message = "追加メッセージは#{Message::ADDITIONAL_MESSAGE_MAX_LENGTH}文字以内で入力してください"
+      render :step6
+      return
+    end
+
+    save_draft("additional_message", additional_message)
     create_message_from_draft
   end
 end
