@@ -42,10 +42,7 @@ class MessagesController < ApplicationController
   end
 
   def step2
-    unless session.dig(:message_draft, "recipient_id")
-      redirect_to step1_message_path
-      return
-    end
+    return redirect_to step1_message_path unless session.dig(:message_draft, "recipient_id")
 
     @occasions = Occasion.all
     @selected_id = session.dig(:message_draft, "occasion_id")
@@ -89,12 +86,7 @@ class MessagesController < ApplicationController
 
   def save_step4
     episode = params[:episode].to_s.strip
-    if episode.length > Message::EPISODE_MAX_LENGTH
-      @episode = episode
-      @error_message = "エピソードは#{Message::EPISODE_MAX_LENGTH}文字以内で入力してください"
-      render :step4
-      return
-    end
+    return if text_too_long?(:step4, :episode, episode, Message::EPISODE_MAX_LENGTH)
 
     save_draft("episode", episode)
     redirect_to step5_message_path
@@ -125,10 +117,8 @@ class MessagesController < ApplicationController
 
   def save_step6
     additional_message = params[:additional_message].to_s.strip
-    if additional_message.length > Message::ADDITIONAL_MESSAGE_MAX_LENGTH
-      @additional_message = additional_message
-      @error_message = "追加メッセージは#{Message::ADDITIONAL_MESSAGE_MAX_LENGTH}文字以内で入力してください"
-      render :step6
+    if text_too_long?(:step6, :additional_message, additional_message,
+                      Message::ADDITIONAL_MESSAGE_MAX_LENGTH)
       return
     end
 
