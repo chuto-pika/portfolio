@@ -25,3 +25,5 @@ ja:
       blank: "を入力してください"
       required: "を選んでください"
       too_long: "は%{count}文字以内で入力してください"
+      not_a_number: "は数値で入力してください"
+      not_an_integer: "は整数で入力してください"
