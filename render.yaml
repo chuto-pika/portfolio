@@ -14,7 +14,7 @@ services:
       - key: DATABASE_URL
         fromDatabase:
           name: epistory-db
-          property: connectionURI
+          property: connectionString
       - key: RAILS_ENV
         value: production
       - key: RAILS_SERVE_STATIC_FILES
