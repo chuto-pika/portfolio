@@ -1,6 +1,6 @@
 # Render.com Blueprint設定
-# このファイルでWebサービスとPostgreSQLデータベースを定義する
-# Renderダッシュボードで「New Blueprint Instance」から読み込んで使用する
+# このファイルでWebサービスを定義する
+# DBはNeon PostgreSQLを使用（DATABASE_URLはRenderダッシュボードで手動設定）
 services:
   - type: web
     name: epistory
@@ -12,16 +12,10 @@ services:
       - key: RAILS_MASTER_KEY
         sync: false
       - key: DATABASE_URL
-        fromDatabase:
-          name: epistory-db
-          property: connectionString
+        sync: false
       - key: RAILS_ENV
         value: production
       - key: RAILS_SERVE_STATIC_FILES
         value: "true"
       - key: RAILS_LOG_TO_STDOUT
         value: "true"
-
-databases:
-  - name: epistory-db
-    plan: free
